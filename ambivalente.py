@@ -111,3 +111,45 @@ def updateBoard(board, n, player, i, j):
         print("Intrusion ! Des pions adverses sont devenus neutres.")
     if len(encerclement_neutralisee) > 0:
         print("Encerclement ! Des pions adverses sont devenus neutres.")
+
+
+def again(board, n):
+
+    for i in range(n):
+        for j in range(n):
+            if board[i][j] == 0:
+                return True
+    return False
+
+
+def winner(board, n):
+    count_player1 = 0
+    count_player2 = 0
+    count_neutral = 0
+    count_empty = 0
+
+    for i in range(n):
+        for j in range(n):
+            valeur = board[i][j]
+
+            if valeur == 1:
+                count_player1 += 1
+            elif valeur == 2:
+                count_player2 += 1
+            elif valeur == 3:
+                count_neutral += 1
+            else:
+                count_empty += 1
+
+    print(f"\nRésultats finaux :")
+    print(f"Joueur 1 (blanc) : {count_player1} pions")
+    print(f"Joueur 2 (noir)  : {count_player2} pions")
+    print(f"Pions neutres    : {count_neutral} pions")
+    print(f"Cases vides      : {count_empty} cases")
+
+    if count_player1 > count_player2:
+        return 1
+    elif count_player2 > count_player1:
+        return 2
+    else:
+        return 0
