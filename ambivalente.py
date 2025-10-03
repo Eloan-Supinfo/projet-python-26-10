@@ -42,30 +42,6 @@ def displayBoard(board, n):
     print()
 
 
-def play(board, n, player):
-
-    jeu = True
-
-    while jeu:
-
-        ligne = int(input("Choississez la ligne : "))
-        colone = int(input("Choisissez la colone : "))
-
-        if 1 <= ligne <= n and 1 <= colone <= n:
-
-            i = ligne - 1  # pour que quand user entre 1, le pion est placé en 1 et non en 2
-            j = colone - 1
-
-            if board[i][j] == 0:
-                jeu = False
-                board[i][j] = player
-            else:
-                print("Case déjà occupée")
-        else:
-            print("Coordonées invalides")
-    return (ligne, colone)
-
-
 def possibleSquare(board, n, i, j):
     if i < 0 or i >= n:
         return False
@@ -79,7 +55,19 @@ def possibleSquare(board, n, i, j):
     return True
 
 
-newBoard()
-displayBoard()
-play()
-possibleSquare()
+def selectSquare(board, n):
+    valide = False
+
+    while not valide:
+        ligne = int(input("Entrez le n° de la ligne : "))
+        colonne = int(input("Entrez le n° de la colonne : "))
+
+        i = ligne - 1  # pour tomber sur les bonnes coordonées
+        j = colonne - 1
+
+        if possibleSquare(board, n, i, j):
+            valide = True
+        else:
+            print("Case invalide ou occupée !")
+
+    return (i, j)
