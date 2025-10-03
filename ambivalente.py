@@ -153,3 +153,45 @@ def winner(board, n):
         return 2
     else:
         return 0
+
+
+def ambivalente(n):
+
+    print("=== JEU AMBIVALENTE ===")
+    print(f"Plateau de taille {n} x {n}")
+    print("Joueur 1 : pions blancs (x)")
+    print("Joueur 2 : pions noirs (o)")
+    print("Pions neutres : (N)")
+    print("\nRègles :")
+    print("- Intrusion : placer un pion entre deux pions adverses alignés les neutralise")
+    print("- Encerclement : placer un pion pour entourer un pion adverse avec un allié le neutralise")
+    print()
+
+    board = newBoard(n)
+    current_player = 1
+
+    # Boucle de jeu
+    while again(board, n):
+        print(
+            f"=== Tour du Joueur {current_player} ({'blanc' if current_player == 1 else 'noir'}) ===")
+        displayBoard(board, n)
+
+        # Demander les coordonnées
+        i, j = selectSquare(board, n)
+
+        # Mets à jour
+        updateBoard(board, n, current_player, i, j)
+
+        # Change de joueur
+        current_player = 2 if current_player == 1 else 1
+
+    print("=== PARTIE TERMINÉE ===")
+    displayBoard(board, n)
+
+    result = winner(board, n)
+    if result == 1:
+        print("🎉 Le Joueur 1 (blanc) remporte la partie !")
+    elif result == 2:
+        print("🎉 Le Joueur 2 (noir) remporte la partie !")
+    else:
+        print("🤝 Égalité ! Les deux joueurs ont le même nombre de pions.")
