@@ -9,7 +9,7 @@ def newBoard(n):  # créer un nouveau plateau vide ( symbolisé par des . )
     return board
 
 
-# créé l'affichage du plateau et traduis les nombres de la liste par le bon symbole
+# créé l'affichage du plateau et traduis les nombres de la liste par le bon symbole lors des inputs
 def displayBoard(board, n):
 
     for i in range(n):
@@ -190,8 +190,30 @@ def ambivalente(n):
 
     result = winner(board, n)
     if result == 1:
-        print("🎉 Le Joueur 1 (blanc) remporte la partie !")
+        print("🎉 Le Joueur 1 remporte la partie !")
     elif result == 2:
-        print("🎉 Le Joueur 2 (noir) remporte la partie !")
+        print("🎉 Le Joueur 2 remporte la partie !")
     else:
         print("🤝 Égalité ! Les deux joueurs ont le même nombre de pions.")
+
+
+def main():
+
+    print("Bienvenue dans le jeu Ambivalente !")
+
+    while True:
+        try:
+            n = int(
+                input("Entrez la taille du plateau ( x * x \) : "))
+            if n >= 3:
+                break
+            else:
+                print("La taille doit être d'au moins 3x3.")
+        except ValueError:
+            print("Veuillez entrer un nombre valide.")
+
+    ambivalente(n)
+
+
+if __name__ == "__main__":
+    main()
