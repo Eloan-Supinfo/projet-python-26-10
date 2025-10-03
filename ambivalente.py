@@ -53,14 +53,33 @@ def play(board, n, player):
 
         if 1 <= ligne <= n and 1 <= colone <= n:
 
-            L = ligne - 1  # pour que quand user entre 1, le pion est placé en 1 et non en 2
-            C = colone - 1
+            i = ligne - 1  # pour que quand user entre 1, le pion est placé en 1 et non en 2
+            j = colone - 1
 
-            if board[L][C] == 0:
+            if board[i][j] == 0:
                 jeu = False
-                board[L][C] = player
+                board[i][j] = player
             else:
                 print("Case déjà occupée")
         else:
             print("Coordonées invalides")
     return (ligne, colone)
+
+
+def possibleSquare(board, n, i, j):
+    if i < 0 or i >= n:
+        return False
+
+    if j < 0 or j >= n:
+        return False
+
+    if board[i][j] != 0:
+        return False
+
+    return True
+
+
+newBoard()
+displayBoard()
+play()
+possibleSquare()
