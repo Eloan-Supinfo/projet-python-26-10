@@ -40,3 +40,27 @@ def displayBoard(board, n):
     for col in range(1, n+1):
         print(col, end=" ")
     print()
+
+
+def play(board, n, player):
+
+    jeu = True
+
+    while jeu:
+
+        ligne = int(input("Choississez la ligne : "))
+        colone = int(input("Choisissez la colone : "))
+
+        if 1 <= ligne <= n and 1 <= colone <= n:
+
+            L = ligne - 1  # pour que quand user entre 1, le pion est placé en 1 et non en 2
+            C = colone - 1
+
+            if board[L][C] == 0:
+                jeu = False
+                board[L][C] = player
+            else:
+                print("Case déjà occupée")
+        else:
+            print("Coordonées invalides")
+    return (ligne, colone)
