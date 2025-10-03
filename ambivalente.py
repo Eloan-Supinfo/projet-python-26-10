@@ -71,3 +71,43 @@ def selectSquare(board, n):
             print("Case invalide ou occupée !")
 
     return (i, j)
+
+
+def updateBoard(board, n, player, i, j):
+
+    board[i][j] = player
+
+    adversaire = 2 if player == 1 else 1
+    directions = [(-1, 0), (1, 0), (0, -1), (0, 1),
+                  (-1, -1), (-1, 1), (1, -1), (1, 1)]
+
+    intrusions_neutralisee = []
+    encerclement_neutralisee = []
+
+    for di, dj in directions:
+        i1, j1 = i + di, j + dj
+        i2, j2 = i + 2*di, j + 2*dj
+
+        if 0 <= i1 < n and 0 <= j1 < n and 0 <= i2 < n and 0 <= j2 < n:
+
+            # check intrusions
+            if board[i1][j1] == adversaire and board[i2][j2] == adversaire:
+                intrusions_neutralisee.append((i1, j1))
+                intrusions_neutralisee.append((i2, j2))
+
+            # check encerclement
+            if board[i1][j1] == adversaire and board[i2][j2] == player:
+                encerclement_neutralisee.append((i1, j1))
+
+    # Appliquer intrusion
+    for ni, nj in intrusions_neutralisee:
+        board[ni][nj] = 3
+
+    # Appliquer encerclement
+    for ni, nj in encerclement_neutralisee:
+        board[ni][nj] = 3
+
+    if len(intrusions_neutralisee) > 0:
+        print("Intrusion ! Des pions adverses sont devenus neutres.")
+    if len(encerclement_neutralisee) > 0:
+        print("Encerclement ! Des pions adverses sont devenus neutres.")
